@@ -1,0 +1,186 @@
+## This file contains all the build statements describing the
+# compilation DAG.
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# 
+# Which is the root file.
+# =============================================================================
+
+# =============================================================================
+# Project: GraveyardShift
+# Configurations: Debug
+# =============================================================================
+
+#############################################
+# Minimal version of Ninja required by this file
+
+ninja_required_version = 1.5
+
+
+#############################################
+# Set configuration variable for custom commands.
+
+CONFIGURATION = Debug
+# =============================================================================
+# Include auxiliary files.
+
+
+#############################################
+# Include rules file.
+
+include CMakeFiles/rules.ninja
+
+# =============================================================================
+
+#############################################
+# Logical path to working directory; prefix for absolute paths.
+
+cmake_ninja_workdir = /Users/marcoseiza/Repos/GraveyardShiftV2/build/
+# =============================================================================
+# Object build statements for EXECUTABLE target GraveyardShift
+
+
+#############################################
+# Order-only phony target for GraveyardShift
+
+build cmake_object_order_depends_target_GraveyardShift: phony || CMakeFiles/GraveyardShift.dir
+
+build CMakeFiles/GraveyardShift.dir/src/app.cc.o: CXX_COMPILER__GraveyardShift_Debug /Users/marcoseiza/Repos/GraveyardShiftV2/src/app.cc || cmake_object_order_depends_target_GraveyardShift
+  DEP_FILE = CMakeFiles/GraveyardShift.dir/src/app.cc.o.d
+  FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -F/Library/Frameworks  -std=gnu++20
+  INCLUDES = -I/Users/marcoseiza/Repos/GraveyardShiftV2/include -I/Library/Frameworks/SDL2.framework/Headers -I/opt/homebrew/include/SDL2 -I/Users/marcoseiza/Repos/GraveyardShiftV2/external/result/include
+  OBJECT_DIR = CMakeFiles/GraveyardShift.dir
+  OBJECT_FILE_DIR = CMakeFiles/GraveyardShift.dir/src
+
+build CMakeFiles/GraveyardShift.dir/src/main.cc.o: CXX_COMPILER__GraveyardShift_Debug /Users/marcoseiza/Repos/GraveyardShiftV2/src/main.cc || cmake_object_order_depends_target_GraveyardShift
+  DEP_FILE = CMakeFiles/GraveyardShift.dir/src/main.cc.o.d
+  FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -F/Library/Frameworks  -std=gnu++20
+  INCLUDES = -I/Users/marcoseiza/Repos/GraveyardShiftV2/include -I/Library/Frameworks/SDL2.framework/Headers -I/opt/homebrew/include/SDL2 -I/Users/marcoseiza/Repos/GraveyardShiftV2/external/result/include
+  OBJECT_DIR = CMakeFiles/GraveyardShift.dir
+  OBJECT_FILE_DIR = CMakeFiles/GraveyardShift.dir/src
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target GraveyardShift
+
+
+#############################################
+# Link the executable GraveyardShift
+
+build GraveyardShift: CXX_EXECUTABLE_LINKER__GraveyardShift_Debug CMakeFiles/GraveyardShift.dir/src/app.cc.o CMakeFiles/GraveyardShift.dir/src/main.cc.o | /opt/homebrew/lib/libSDL2_image.dylib
+  FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk
+  LINK_LIBRARIES = -Wl,-rpath,/Library/Frameworks  -framework  SDL2  /opt/homebrew/lib/libSDL2_image.dylib
+  LINK_PATH = -F/Library/Frameworks
+  OBJECT_DIR = CMakeFiles/GraveyardShift.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = GraveyardShift
+  TARGET_PDB = GraveyardShift.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/marcoseiza/Repos/GraveyardShiftV2/build && /opt/homebrew/Cellar/cmake/3.23.2/bin/ccmake -S/Users/marcoseiza/Repos/GraveyardShiftV2 -B/Users/marcoseiza/Repos/GraveyardShiftV2/build
+  DESC = Running CMake cache editor...
+  pool = console
+  restat = 1
+
+build edit_cache: phony CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/marcoseiza/Repos/GraveyardShiftV2/build && /opt/homebrew/Cellar/cmake/3.23.2/bin/cmake --regenerate-during-build -S/Users/marcoseiza/Repos/GraveyardShiftV2 -B/Users/marcoseiza/Repos/GraveyardShiftV2/build
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build rebuild_cache: phony CMakeFiles/rebuild_cache.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /Users/marcoseiza/Repos/GraveyardShiftV2/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for edit_cache
+
+build external/result/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/marcoseiza/Repos/GraveyardShiftV2/build/external/result && /opt/homebrew/Cellar/cmake/3.23.2/bin/ccmake -S/Users/marcoseiza/Repos/GraveyardShiftV2 -B/Users/marcoseiza/Repos/GraveyardShiftV2/build
+  DESC = Running CMake cache editor...
+  pool = console
+  restat = 1
+
+build external/result/edit_cache: phony external/result/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build external/result/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/marcoseiza/Repos/GraveyardShiftV2/build/external/result && /opt/homebrew/Cellar/cmake/3.23.2/bin/cmake --regenerate-during-build -S/Users/marcoseiza/Repos/GraveyardShiftV2 -B/Users/marcoseiza/Repos/GraveyardShiftV2/build
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build external/result/rebuild_cache: phony external/result/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
+# Target aliases.
+
+# =============================================================================
+# Folder targets.
+
+# =============================================================================
+
+#############################################
+# Folder: /Users/marcoseiza/Repos/GraveyardShiftV2/build
+
+build all: phony GraveyardShift external/result/all
+
+# =============================================================================
+
+#############################################
+# Folder: /Users/marcoseiza/Repos/GraveyardShiftV2/build/external/result
+
+build external/result/all: phony
+
+# =============================================================================
+# Built-in targets
+
+
+#############################################
+# Re-run CMake if any of its inputs changed.
+
+build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../cmake/sdl2/FindSDL2.cmake ../cmake/sdl2/FindSDL2_image.cmake ../external/result/CMakeLists.txt ../external/result/cmake/AddSelfContainmentTest.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/CMakeCInformation.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/CMakeCXXInformation.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/CMakeCommonLanguageInclude.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/CMakeGenericSystem.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/CMakeInitializeConfigs.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/CMakeLanguageInformation.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Compiler/AppleClang-C.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Compiler/AppleClang-CXX.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Compiler/Clang.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Compiler/GNU.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/FindPackageHandleStandardArgs.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/FindPackageMessage.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Platform/Apple-AppleClang-C.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Platform/Apple-AppleClang-CXX.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Platform/Apple-Clang-C.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Platform/Apple-Clang-CXX.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Platform/Apple-Clang.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Platform/Darwin-Initialize.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Platform/Darwin.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.23.2/CMakeCCompiler.cmake CMakeFiles/3.23.2/CMakeCXXCompiler.cmake CMakeFiles/3.23.2/CMakeSystem.cmake
+  pool = console
+
+
+#############################################
+# A missing CMake input file is not an error.
+
+build ../CMakeLists.txt ../cmake/sdl2/FindSDL2.cmake ../cmake/sdl2/FindSDL2_image.cmake ../external/result/CMakeLists.txt ../external/result/cmake/AddSelfContainmentTest.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/CMakeCInformation.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/CMakeCXXInformation.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/CMakeCommonLanguageInclude.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/CMakeGenericSystem.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/CMakeInitializeConfigs.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/CMakeLanguageInformation.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Compiler/AppleClang-C.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Compiler/AppleClang-CXX.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Compiler/Clang.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Compiler/GNU.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/FindPackageHandleStandardArgs.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/FindPackageMessage.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Platform/Apple-AppleClang-C.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Platform/Apple-AppleClang-CXX.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Platform/Apple-Clang-C.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Platform/Apple-Clang-CXX.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Platform/Apple-Clang.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Platform/Darwin-Initialize.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Platform/Darwin.cmake /opt/homebrew/Cellar/cmake/3.23.2/share/cmake/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.23.2/CMakeCCompiler.cmake CMakeFiles/3.23.2/CMakeCXXCompiler.cmake CMakeFiles/3.23.2/CMakeSystem.cmake: phony
+
+
+#############################################
+# Clean all the built files.
+
+build clean: CLEAN
+
+
+#############################################
+# Print all primary targets available.
+
+build help: HELP
+
+
+#############################################
+# Make the all target the default.
+
+default all

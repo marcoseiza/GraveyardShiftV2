@@ -1,3 +1,6 @@
-[submodule "sdl"]
-	path = sdl
-	url = https://github.com/libsdl-org/SDL.git
+[submodule "cmake/sdl2"]
+	path = cmake/sdl2
+	url = https://gitlab.com/aminosbh/sdl2-cmake-modules.git
+[submodule "external/result"]
+	path = external/result
+	url = https://github.com/bitwizeshift/result.git
