@@ -1,7 +1,6 @@
 #include "app.h"
 
 #include <SDL.h>
-#include <SDL_image.h>
 
 #include "result.hpp"
 
@@ -39,8 +38,8 @@ auto App::init() -> cpp::result<void, InitError> {
 
 bool App::step() {
   SDL_Event event;
-
-  draw_rect_.x += 20;
+  while (SDL_PollEvent(&event))
+    ;
 
   draw();
   return true;

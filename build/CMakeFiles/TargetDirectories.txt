@@ -1,5 +1,0 @@
-/Users/marcoseiza/Repos/GraveyardShiftV2/build/CMakeFiles/GraveyardShift.dir
-/Users/marcoseiza/Repos/GraveyardShiftV2/build/CMakeFiles/edit_cache.dir
-/Users/marcoseiza/Repos/GraveyardShiftV2/build/CMakeFiles/rebuild_cache.dir
-/Users/marcoseiza/Repos/GraveyardShiftV2/build/external/result/CMakeFiles/edit_cache.dir
-/Users/marcoseiza/Repos/GraveyardShiftV2/build/external/result/CMakeFiles/rebuild_cache.dir

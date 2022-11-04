@@ -32,8 +32,8 @@ class App {
   int window_width_;
   int window_height_;
   std::string window_title_;
-  SDL_Window *window_ = nullptr;
-  SDL_Renderer *renderer_ = nullptr;
+  SDL_Window* window_ = nullptr;
+  SDL_Renderer* renderer_ = nullptr;
 };
 
 #endif  //!__APP__H__
