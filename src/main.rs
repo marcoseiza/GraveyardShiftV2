@@ -1,18 +1,28 @@
 use bevy::{prelude::*, render::texture::ImageSettings};
 use bevy_asset_loader::prelude::*;
-use bevy_pixel_camera::PixelCameraPlugin;
+use bevy_ecs_ldtk::prelude::*;
+use bevy_inspector_egui::RegisterInspectable;
+use bevy_pixel_camera::*;
+use bevy_rapier2d::prelude::*;
+use components::wall_collisions::*;
 use debug::*;
 use game_state::GameState;
-use graphics::camera::spawn_camera;
+use graphics::camera::*;
 use iyes_loopless::prelude::*;
+use mutant::MutantBundle;
 use player::*;
-use resources::textures::*;
+use resources::*;
 
+mod components;
 mod debug;
 mod game_state;
 mod graphics;
+mod mutant;
 mod player;
 mod resources;
+mod utils;
+
+const LEVEL_ONE_ID: &str = "01a63d70-5110-11ed-a5d6-d713966358e6";
 
 fn main() {
     App::new()
@@ -31,15 +41,40 @@ fn main() {
             LoadingState::new(GameState::AssetLoading)
                 // https://github.com/NiklasEi/bevy_asset_loader/issues/54
                 .continue_to_state(GameState::Playing)
-                .with_collection::<TextureAssets>(),
+                .with_collection::<WorldAssets>(),
         )
-        // ==== Setup ====
+        // ===============
+        .insert_resource(LevelSelection::Iid(LEVEL_ONE_ID.into()))
         .add_enter_system(GameState::Playing, spawn_camera)
-        .add_enter_system(GameState::Playing, spawn_player)
+        .add_enter_system(GameState::Playing, spawn_world)
         // ===============
         .insert_resource(ClearColor(Color::BLACK))
         .add_plugin(DebugPlugin)
         .add_plugin(PixelCameraPlugin)
+        .add_system(spawn_wall_collision)
+        .add_system_to_stage(CoreStage::PostUpdate, camera_follow_anchor)
+        .add_plugin(LdtkPlugin)
+        .insert_resource(LdtkSettings {
+            int_grid_rendering: IntGridRendering::Invisible,
+            ..Default::default()
+        })
         .add_plugin(PlayerPlugin)
+        .add_plugin(RapierPhysicsPlugin::<NoUserData>::pixels_per_meter(100.0))
+        .add_plugin(RapierDebugRenderPlugin::default())
+        .insert_resource(RapierConfiguration {
+            gravity: Vec2::ZERO,
+            ..Default::default()
+        })
+        .register_ldtk_int_cell::<WallBundle>(1)
+        .register_inspectable::<CameraAnchor>()
+        .register_ldtk_entity::<PlayerBundle>("Player")
+        .register_ldtk_entity::<MutantBundle>("Mutant")
         .run();
+}
+
+fn spawn_world(mut commands: Commands, assets: Res<WorldAssets>) {
+    commands.spawn_bundle(LdtkWorldBundle {
+        ldtk_handle: assets.map.clone(),
+        ..Default::default()
+    });
 }

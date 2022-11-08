@@ -1,0 +1,3 @@
+[submodule "bevy_ecs_ldtk"]
+	path = bevy_ecs_ldtk
+	url = https://github.com/marcoseiza/bevy_ecs_ldtk.git

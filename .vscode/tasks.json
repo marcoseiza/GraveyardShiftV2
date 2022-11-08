@@ -1,0 +1,14 @@
+{
+  "tasks": [
+    {
+      "label": "Copy Assets Folder",
+      "type": "shell",
+      "command": "cp -R ${workspaceFolder}/assets ${workspaceFolder}/target/debug/assets",
+      "presentation": {
+        "reveal": "never",
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

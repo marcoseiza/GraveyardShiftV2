@@ -1,6 +1,9 @@
-use crate::resources::textures::TextureAssets;
+use crate::components::physics::*;
+use crate::graphics::camera::CameraAnchor;
 use bevy::prelude::*;
+use bevy_ecs_ldtk::prelude::*;
 use bevy_inspector_egui::Inspectable;
+use bevy_rapier2d::prelude::*;
 
 pub struct PlayerPlugin;
 
@@ -10,18 +13,17 @@ impl Plugin for PlayerPlugin {
     }
 }
 
-#[derive(Component, Inspectable)]
-pub struct Player {
-    speed: f32,
-}
+#[derive(Copy, Clone, Eq, PartialEq, Debug, Default, Component, Inspectable)]
+pub struct Player;
+
+const PLAYER_TARGET_SPEED: f32 = 100.0;
 
 fn player_movement(
-    mut player_query: Query<(&Player, &mut Transform)>,
+    mut player_query: Query<(Entity, &Velocity, &mut ExternalForce), With<Player>>,
     keyboard: Res<Input<KeyCode>>,
-    time: Res<Time>,
 ) {
-    if let Ok((player, mut transform)) = player_query.get_single_mut() {
-        let mut move_dir = Vec3::default();
+    if let Ok((_player, velocity, mut ext_force)) = player_query.get_single_mut() {
+        let mut move_dir = Vec2::default();
 
         if keyboard.pressed(KeyCode::W) {
             move_dir.y += 1.;
@@ -36,24 +38,41 @@ fn player_movement(
             move_dir.x -= 1.;
         }
 
-        // move_dir will not normalize with a length of zero or close to zero.
-        if let Some(normal_move_dir) = move_dir.try_normalize() {
-            let length = player.speed * time.delta_seconds();
-            transform.translation += normal_move_dir * length;
+        // If move_dir is not a vector of length 0.0.
+        if move_dir.try_normalize().is_some() {
+            ext_force.force = (move_dir * PLAYER_TARGET_SPEED) - velocity.linvel;
+        } else {
+            ext_force.force = Vec2::splat(0.);
         }
     }
 }
 
-pub fn spawn_player(mut commands: Commands, assets: Res<TextureAssets>) {
-    let sprite = TextureAtlasSprite::new(0);
-    let bundle = SpriteSheetBundle {
-        sprite,
-        texture_atlas: assets.player.clone(),
-        ..Default::default()
-    };
+#[derive(Bundle, Default, LdtkEntity)]
+pub struct PlayerBundle {
+    player: Player,
+    #[with(player_collider)]
+    #[bundle]
+    collider: ColliderBundle,
+    #[with(player_camera_anchor)]
+    camera_anchor: CameraAnchor,
+    #[sprite_sheet_bundle("player.png", 32.0, 32.0, 8, 1, 0.0, 0.0, 0, 5.0, 0.0)]
+    #[bundle]
+    sprite_bundle: SpriteSheetBundle,
+}
 
-    commands
-        .spawn_bundle(bundle)
-        .insert(Name::new("Player"))
-        .insert(Player { speed: 64. });
+fn player_camera_anchor(_: EntityInstance) -> CameraAnchor {
+    CameraAnchor(1)
+}
+
+fn player_collider(_: EntityInstance) -> ColliderBundle {
+    ColliderBundle {
+        collider: Collider::capsule(Vec2::new(0., -4.), Vec2::new(0., -12.), 5.),
+        rigid_body: RigidBody::Dynamic,
+        rotation_constraints: LockedAxes::ROTATION_LOCKED,
+        damping: Damping {
+            linear_damping: 10.0,
+            ..Default::default()
+        },
+        ..Default::default()
+    }
 }

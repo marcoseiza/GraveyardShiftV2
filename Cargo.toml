@@ -1,22 +1,28 @@
 [package]
-name = "graveyard_shift_v2"
+name = "graveyard_shift"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
 anyhow = "1.0.66"
+# For Release:
+# bevy = "0.8.1"
 # For Dev:
 bevy = { version = "0.8.1", features = ["dynamic"] }
 bevy_asset_loader = { version = "0.12.1", features = ["2d", "stageless"] }
 bevy-inspector-egui = "0.13.0"
-# For Release:
-# bevy = "0.8.1"
 bevy_pixel_camera = "0.2.1"
 iyes_loopless = "0.7.0"
 iyes_progress = { version = "0.5.0", features = ["iyes_loopless"] }
+serde = "1.0.147"
+serde_json = "1.0.87"
+bevy_ecs_ldtk = { path = "./bevy_ecs_ldtk" }
+bevy-trait-query = "0.0.3"
+bevy_rapier2d = "0.18.0"
 
 [workspace]
-resolver = "2" # Important! wgpu/Bevy needs this!
+resolver = "2"              # Important! wgpu/Bevy needs this!
+exclude = ["bevy_ecs_ldtk"]
 
 # Enable a small amount of optimization in debug mode
 [profile.dev]
