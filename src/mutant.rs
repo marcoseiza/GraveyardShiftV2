@@ -14,7 +14,7 @@ pub struct MutantBundle {
     #[bundle]
     collider: ColliderBundle,
     mutant: Mutant,
-    #[sprite_sheet_bundle("mutant.png", 32.0, 32.0, 4, 1, 0.0, 0.0, 0, 0., 0.)]
+    #[sprite_sheet_bundle("mutant.png", 32.0, 32.0, 4, 1, 0.0, 0.0, 0)]
     #[bundle]
     sprite_bundle: SpriteSheetBundle,
 }

@@ -39,7 +39,6 @@ fn main() {
         .add_loopless_state(GameState::AssetLoading)
         .add_loading_state(
             LoadingState::new(GameState::AssetLoading)
-                // https://github.com/NiklasEi/bevy_asset_loader/issues/54
                 .continue_to_state(GameState::Playing)
                 .with_collection::<WorldAssets>(),
         )

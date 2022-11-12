@@ -55,7 +55,7 @@ pub struct PlayerBundle {
     collider: ColliderBundle,
     #[with(player_camera_anchor)]
     camera_anchor: CameraAnchor,
-    #[sprite_sheet_bundle("player.png", 32.0, 32.0, 8, 1, 0.0, 0.0, 0, 5.0, 0.0)]
+    #[sprite_sheet_bundle("player.png", 32.0, 32.0, 8, 1, 0.0, 0.0, 0)]
     #[bundle]
     sprite_bundle: SpriteSheetBundle,
 }
