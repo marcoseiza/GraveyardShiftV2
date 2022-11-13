@@ -3,7 +3,7 @@ use bevy_ecs_ldtk::prelude::*;
 use bevy_inspector_egui::prelude::*;
 use bevy_rapier2d::prelude::*;
 
-use crate::components::physics::ColliderBundle;
+use crate::{components::physics::ColliderBundle, graphics::camera::CameraAnchor};
 
 #[derive(Component, Default, Inspectable)]
 pub struct Mutant;
@@ -17,6 +17,12 @@ pub struct MutantBundle {
     #[sprite_sheet_bundle("mutant.png", 32.0, 32.0, 4, 1, 0.0, 0.0, 0)]
     #[bundle]
     sprite_bundle: SpriteSheetBundle,
+    #[with(mutant_camera_anchor)]
+    camera_anchor: CameraAnchor,
+}
+
+fn mutant_camera_anchor(_: EntityInstance) -> CameraAnchor {
+    CameraAnchor(0)
 }
 
 fn mutant_collider(_: EntityInstance) -> ColliderBundle {
