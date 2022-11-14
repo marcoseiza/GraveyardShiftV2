@@ -66,6 +66,7 @@ fn main() {
         })
         .register_ldtk_int_cell::<WallBundle>(1)
         .register_inspectable::<CameraAnchor>()
+        .register_inspectable::<MovementForce>()
         .register_inspectable::<CurrentCameraAnchorEntityId>()
         .register_ldtk_entity::<PlayerBundle>("Player")
         .register_ldtk_entity::<MutantBundle>("Mutant")

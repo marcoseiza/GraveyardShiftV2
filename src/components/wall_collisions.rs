@@ -4,8 +4,13 @@ use bevy_rapier2d::prelude::*;
 
 use std::collections::{HashMap, HashSet};
 
+use super::physics::WALL_PHYS_LAYER;
+
 #[derive(Copy, Clone, Eq, PartialEq, Debug, Default, Component)]
 pub struct Wall;
+
+#[derive(Copy, Clone, Eq, PartialEq, Debug, Default, Component)]
+pub struct WallCollider;
 
 #[derive(Clone, Debug, Default, Bundle, LdtkIntCell)]
 pub struct WallBundle {
@@ -29,7 +34,7 @@ struct Rect {
     bottom: i32,
 }
 
-/// Spawns heron collisions for the walls of a level
+/// Spawns rapier collisions for the walls of a level
 ///
 /// You could just insert a ColliderBundle in to the WallBundle,
 /// but this spawns a different collider for EVERY wall tile.
@@ -93,13 +98,10 @@ pub fn spawn_wall_collision(
                     for wall_rect in wall_rects {
                         level
                             .spawn()
+                            .insert(WallCollider)
                             .insert(Collider::cuboid(
-                                (wall_rect.right as f32 - wall_rect.left as f32 + 1.)
-                                    * grid_size as f32
-                                    / 2.,
-                                (wall_rect.top as f32 - wall_rect.bottom as f32 + 1.)
-                                    * grid_size as f32
-                                    / 2.,
+                                ((wall_rect.right - wall_rect.left + 1) * grid_size) as f32 / 2.,
+                                ((wall_rect.top - wall_rect.bottom + 1) * grid_size) as f32 / 2.,
                             ))
                             .insert(RigidBody::Fixed)
                             .insert(Friction {
@@ -107,12 +109,11 @@ pub fn spawn_wall_collision(
                                 combine_rule: CoefficientCombineRule::Min,
                             })
                             .insert(Transform::from_xyz(
-                                (wall_rect.left + wall_rect.right + 1) as f32 * grid_size as f32
-                                    / 2.,
-                                (wall_rect.bottom + wall_rect.top + 1) as f32 * grid_size as f32
-                                    / 2.,
+                                ((wall_rect.left + wall_rect.right + 1) * grid_size) as f32 / 2.,
+                                ((wall_rect.bottom + wall_rect.top + 1) * grid_size) as f32 / 2.,
                                 0.,
                             ))
+                            .insert(CollisionGroups::new(WALL_PHYS_LAYER, Group::all()))
                             .insert(GlobalTransform::default());
                     }
                 });

@@ -13,6 +13,8 @@ pub struct ColliderBundle {
     pub restitution: Restitution,
     pub mass_properties: ColliderMassProperties,
     pub force: ExternalForce,
+    pub solver_groups: SolverGroups,
+    pub collision_groups: CollisionGroups,
 }
 
 impl From<EntityInstance> for ColliderBundle {
@@ -23,3 +25,8 @@ impl From<EntityInstance> for ColliderBundle {
         }
     }
 }
+
+pub const WALL_PHYS_LAYER: Group = Group::GROUP_1;
+pub const PLAYER_PHYS_LAYER: Group = Group::GROUP_2;
+pub const MUTANT_PHYS_LAYER: Group = Group::GROUP_3;
+pub const SOUND_PHYS_LAYER: Group = Group::GROUP_10;

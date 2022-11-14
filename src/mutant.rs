@@ -3,7 +3,7 @@ use bevy_ecs_ldtk::prelude::*;
 use bevy_inspector_egui::prelude::*;
 use bevy_rapier2d::prelude::*;
 
-use crate::{components::physics::ColliderBundle, graphics::camera::CameraAnchor};
+use crate::{components::physics::*, graphics::camera::CameraAnchor};
 
 #[derive(Component, Default, Inspectable)]
 pub struct Mutant;
@@ -34,6 +34,7 @@ fn mutant_collider(_: EntityInstance) -> ColliderBundle {
             linear_damping: 10.0,
             ..Default::default()
         },
+        collision_groups: CollisionGroups::new(MUTANT_PHYS_LAYER, Group::all()),
         ..Default::default()
     }
 }
